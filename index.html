@@ -1,1 +1,618 @@
-Hello World
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="业余数学家">
+    <meta name="keywords"  content="高斯的博客,数据挖掘,机器学习,计算机视觉,tensorflow,大数据,爬虫,黑客">
+    <meta name="theme-color" content="#000000">
+    
+    <title>高斯的博客 | Gauss Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://liejiang.github.io/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Gauss Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/post-bg-desk.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>Gauss Blog</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">不承认复数(complex number)，因为它们太简单了</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/2018/10/18/seq2seq+attention/">
+        <h2 class="post-title">
+            seq2seq
+        </h2>
+        
+        <h3 class="post-subtitle">
+            "tensorflow 实现seq2seq + attention 的聊天机器人"
+        </h3>
+        
+        <div class="post-content-preview">
+            正文
+
+train 和 inferenece 阶段decoder输入的不同：
+train 阶段 ：用 target作为输入预测下个
+inference 阶段 ： 用之前的输出作为输入
+
+quora大佬的回答：
+
+
+the inputs to the decoder were a linear combination of the encoder’s hidden states and (op...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Gauss on October 18, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2018/02/04/%E6%96%B0%E5%B9%B4%E4%B9%A6%E5%8D%95/">
+        <h2 class="post-title">
+            新年书单
+        </h2>
+        
+        <h3 class="post-subtitle">
+            "多看书，多跑步"
+        </h3>
+        
+        <div class="post-content-preview">
+            前言
+
+  一下子买了很多书，希望今年能够读完。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+—— Gauss 后记于 2018.04
+
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Gauss on February 4, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/12/29/%E4%B8%80%E4%BA%9B%E4%B8%AA%E4%BA%BA%E4%BD%9C%E5%93%81/">
+        <h2 class="post-title">
+            Hello 2018
+        </h2>
+        
+        <h3 class="post-subtitle">
+            "一些有趣的小程序，持续更新"
+        </h3>
+        
+        <div class="post-content-preview">
+            前言
+一些有趣的代码
+
+通过opencv轻松实现带圣诞帽
+
+
+Python 玩转微信跳一跳
+
+
+
+[Java 赢百万奖金]
+
+
+适用于今日头条的百万英雄，手机分辨率1920*1080。建议开四个线程去访问百度，记得带上refer。总体时间不超过800ms。
+  public static Problem getProblem(BufferedImage image) throws Excep...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Gauss on December 29, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/12/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E6%89%AB%E7%9B%B2/">
+        <h2 class="post-title">
+            机器学习的常用算法
+        </h2>
+        
+        <h3 class="post-subtitle">
+            "机器学习门槛其实很低的，会求导数足矣"
+        </h3>
+        
+        <div class="post-content-preview">
+            正文
+
+SVM
+目前还木有全部推导出来
+
+ALS算法
+ALS是一种常用的推荐算法,觉得有点天马行空。
+通常我们有user-item的稀疏矩阵。我们希望填满成为稠密矩阵。
+
+如果把这个稀疏矩阵分解为两个小矩阵相乘的话就可以填满。还可以得到user和item的隐含特征。通常称为Latent factor。k的典型取值一般是20～200。
+
+
+求解思路也非常简单！只需要最小化误差,考虑到稳定性，可...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Gauss on December 1, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/11/19/20-30%E5%88%86%E9%92%9F%E5%BF%AB%E9%80%9F%E9%80%86%E5%90%91%E5%BF%AB%E6%89%8BApp/">
+        <h2 class="post-title">
+            快手App的逆向
+        </h2>
+        
+        <h3 class="post-subtitle">
+            "开车要注意安全"
+        </h3>
+        
+        <div class="post-content-preview">
+            正文
+直接下载安装最新安卓版本快手App,手机抓包。
+
+
+直接用这些参数发请求，发现ok.很明显sig就是做校验用的。
+
+随便修改下sig发现果然结果返回异常。
+
+下面研究下sig怎么生成的。反编译apk
+
+
+sig的生成，以及登陆token的生成。（不过爬快手的话不需要登陆，只需要sig）
+
+
+
+sig的生成很简单，花几分钟追一下可以了。详细代码就不贴出来了。
+
+总结
+  最后提醒下大家注...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Gauss on November 19, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/11/19/%E4%BB%8E%E4%B8%80%E5%88%B0%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AF%B4%E8%B5%B7/">
+        <h2 class="post-title">
+            从一到简单的面试题说起
+        </h2>
+        
+        <h3 class="post-subtitle">
+            "这是一到简单的面试题，不过很多公司给出了错误的答案"
+        </h3>
+        
+        <div class="post-content-preview">
+            正文
+ 斐波那契数列指的是这样一个数列 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233，377，610，987，1597，2584，4181，6765，10946，17711，28657，46368……..这个数列从第3项开始，每一项都等于前两项之和。
+那么求an的最优时间复杂度为多少呢？其实不是O(n),而是O(1)。其实这是一道高中数学送分题...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Gauss on November 19, 2017
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2017/11/17/test/">
+        <h2 class="post-title">
+            Hello 2017
+        </h2>
+        
+        <h3 class="post-subtitle">
+            "Hello World, Hello Blog"
+        </h3>
+        
+        <div class="post-content-preview">
+            前言
+今天我开通个人博客了。
+—— Gauss 后记于 2017.11
+
+
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Gauss on November 17, 2017
+    </p>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                            
+                                <a href="/tags/#test" title="test" rel="3">
+                                    test
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+                        
+                            <a href="/about">
+                                <img src="/img/about-BY-gentle.jpg"/>
+                            </a>
+                        
+                        
+                            <p>费马认为他的书的边缘太小，写不下费马大定理的证明。而我找到了一个证明，对这个证明而言那本书的边缘太大了</p>
+                        
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            <!-- add jianshu add target = "_blank" to <a> by BY -->
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        </ul>
+                        
+                            <p>✉️ jianglie@vip.qq.com</p>
+                        
+                    </div>
+                </section>
+                <!-- Friends Blog -->
+                
+    		</div>
+        
+	</div>
+</div>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <!-- add jianshu add target = "_blank" to <a> by BY -->
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gauss Blog 2018
+                    <br>
+                    Theme on <a href="https://github.com/liejiang/liejiang.github.io.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=liejiang&repo=liejiang.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/apple-touch-icon.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
